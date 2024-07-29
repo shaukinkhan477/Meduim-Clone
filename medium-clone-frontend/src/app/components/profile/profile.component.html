@@ -1,1 +1,9 @@
-<p>profile works!</p>
+<div class="profile-container">
+  <mat-card>
+    <mat-card-title>Profile</mat-card-title>
+    <mat-card-content>
+      <p><strong>Username:</strong> {{ authService.currentUserValue.username }}</p>
+      <p><strong>Email:</strong> {{ authService.currentUserValue.email }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

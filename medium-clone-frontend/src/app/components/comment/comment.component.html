@@ -1,1 +1,12 @@
-<p>comment works!</p>
+<div class="comment-container">
+  <mat-card *ngFor="let comment of comments">
+    <mat-card-content>
+      <p>{{ comment.content }}</p>
+      <mat-card-subtitle>by {{ comment.author.username }}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+  <mat-form-field class="comment-input">
+    <textarea matInput placeholder="Write comment ..." [(ngModel)]="newComment"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="addComment()">Comment</button>
+</div>
