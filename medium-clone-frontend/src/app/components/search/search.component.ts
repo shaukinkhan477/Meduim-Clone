@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [MatFormFieldModule,FormsModule,MatChipsModule],
+  imports: [MatFormFieldModule,FormsModule,MatChipsModule,MatInputModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })

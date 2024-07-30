@@ -4,12 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import {MatInputModule} from '@angular/material/input';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatCardModule,MatFormFieldModule,FormsModule],
+  imports: [MatCardModule,MatFormFieldModule,FormsModule,MatInputModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

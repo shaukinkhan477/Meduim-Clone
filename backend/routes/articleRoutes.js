@@ -1,5 +1,4 @@
 const express = require('express');
-const { protect } = require('../middleware/authMiddleware');
 const {
   createArticle,
   getAllArticles,
@@ -8,6 +7,8 @@ const {
   deleteArticle,
   unpublishArticle
 } = require('../controllers/articleController');
+const { protect } = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
 // Routes for articles

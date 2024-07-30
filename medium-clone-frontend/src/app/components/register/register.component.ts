@@ -4,11 +4,12 @@ import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [MatFormFieldModule,MatCardModule,FormsModule],
+  imports: [MatFormFieldModule,MatCardModule,FormsModule,MatInputModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

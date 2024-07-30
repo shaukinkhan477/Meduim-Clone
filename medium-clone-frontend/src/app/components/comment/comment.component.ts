@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { CommentService } from '../../services/comment.service';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-comment',
   standalone: true,
-  imports: [MatCardModule,MatFormFieldModule, FormsModule],
+  imports: [MatCardModule,MatFormFieldModule, FormsModule,MatInputModule],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })

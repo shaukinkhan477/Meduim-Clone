@@ -6,12 +6,13 @@ import {MatCardModule} from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-article',
   standalone: true,
-  imports: [MatCardModule,CommonModule,FormsModule,MatFormFieldModule,MatIconModule],
+  imports: [MatCardModule,CommonModule,FormsModule,MatFormFieldModule,MatIconModule,MatInputModule],
   templateUrl: './article.component.html',
   styleUrl: './article.component.css'
 })

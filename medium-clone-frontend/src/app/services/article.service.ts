@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
 
   getAllArticles(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl).pipe(
+      tap((data) => console.log('Articles fetched from API:', data))
+    );
   }
 
   getArticleById(id: string): Observable<any> {

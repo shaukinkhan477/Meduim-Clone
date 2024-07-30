@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const articleRoutes = require('./routes/articleRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const reactionRoutes = require('./routes/reactionRoutes');
+const cors = require('cors');
 
 const app = express();
 
@@ -13,6 +14,7 @@ connectDB();
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
