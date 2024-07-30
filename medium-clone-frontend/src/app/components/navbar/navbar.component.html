@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
-  <span>Medium Clone</span>
+  <span class="logo">Medium</span>
   <span class="spacer"></span>
-  <button mat-button routerLink="/">Home</button>
-  <button mat-button *ngIf="!authService.isAuthenticated()" routerLink="/login">Login</button>
-  <button mat-button *ngIf="!authService.isAuthenticated()" routerLink="/register">Register</button>
-  <button mat-button *ngIf="authService.isAuthenticated()" routerLink="/profile">Profile</button>
+  <button mat-button routerLink="/" (click)="home()">Home</button>
+  <button mat-button routerLink="/login" (click)="login()">Login</button>
+  <button mat-button routerLink="/register" (click)="register()">Register</button>
+  <button mat-button *ngIf="authService.isAuthenticated()" (click)="profile()">Profile</button>
   <button mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">Logout</button>
 </mat-toolbar>

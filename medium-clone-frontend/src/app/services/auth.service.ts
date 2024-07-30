@@ -54,12 +54,10 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = this.getToken();
-    // You can add additional token validation logic here if needed
     return !!token;
   }
 
   private getUserFromToken(token: string): any {
-    // Decode the token to extract user information (assuming JWT)
     const payload = token.split('.')[1];
     return JSON.parse(atob(payload));
   }

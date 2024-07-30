@@ -4,7 +4,8 @@ import { ArticleComponent } from './components/article/article.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AuthGuard } from './auth.guard';
+import { SearchComponent } from './components/search/search.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'article', component: ArticleComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];

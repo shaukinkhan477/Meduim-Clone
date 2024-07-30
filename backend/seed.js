@@ -13,13 +13,13 @@ const seedArticles = async () => {
       author: '66a73cdcb8de65fac12cc2be',
       published: true
     },
-    {
-      title: 'Second Article',
-      content: 'This is the content of the second article.',
-      tags: ['tag3', 'tag4'],
-      author: '66a75dbfb5b029e31d48c4e3', 
-      published: true
-    },
+    // {
+    //   title: 'Second Article',
+    //   content: 'This is the content of the second article.',
+    //   tags: ['tag3', 'tag4'],
+    //   author: '66a75dbfb5b029e31d48c4e3', 
+    //   published: true
+    // },
       {
       title: 'Second Article',
       content: 'This is the content of the second article.',
