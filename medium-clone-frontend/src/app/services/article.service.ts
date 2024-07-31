@@ -22,18 +22,32 @@ export class ArticleService {
   }
 
   createArticle(articleData: any): Observable<any> {
-    return this.http.post(this.apiUrl, articleData);
+    return this.http.post(this.apiUrl, articleData).pipe(
+      tap((data) => console.log('Article created:', data))
+    );
   }
 
   updateArticle(id: string, articleData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, articleData);
+    return this.http.put(`${this.apiUrl}/${id}`, articleData).pipe(
+      tap((data) => console.log('Article updated:', data))
+    );
   }
 
   deleteArticle(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`).pipe(
+      tap((data) => console.log('Article deleted:', data))
+    );
   }
 
   unpublishArticle(id: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}/unpublish`, {});
+    return this.http.put(`${this.apiUrl}/${id}/unpublish`, {}).pipe(
+      tap((data) => console.log('Article unpublished:', data))
+    );
+  }
+
+  searchArticles(query: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search?query=${query}`).pipe(
+      tap((data) => console.log('Search results:', data))
+    );
   }
 }

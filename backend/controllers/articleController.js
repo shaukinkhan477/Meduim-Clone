@@ -108,3 +108,16 @@ exports.unpublishArticle = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+
+exports.searchArticles = async (req, res) => {
+  try {
+    const query = req.query.query;
+    const articles = await Article.find({
+      $text: { $search: query },
+      published: true
+    }).populate('author', 'username email');
+    res.status(200).json(articles);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};

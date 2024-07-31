@@ -1,16 +1,52 @@
-<div class="article-list-container">
-  <div *ngFor="let article of articles" class="article-card">
+<div class="main-container">
+  <div class="article-list">
+     <app-search (search)="searchArticles($event)"></app-search>
+    <div *ngFor="let article of articles" class="article-card">
+      <mat-card>
+        <mat-card-title>{{ article.title }}</mat-card-title>
+        <mat-card-subtitle>by {{ article.author.username }} </mat-card-subtitle>
+        <mat-card-content>
+          <p>{{ article.content | slice: 0:100 }}...</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="selectArticle(article._id)">Read More</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="article-detail" *ngIf="selectedArticle">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ article.title }}</mat-card-title>
-        <mat-card-subtitle>by {{ article.author.username }}</mat-card-subtitle>
+        <mat-card-title>{{ selectedArticle.title }}</mat-card-title>
+        <mat-card-subtitle>by {{ selectedArticle.author.username }} – Published at {{ selectedArticle.createdAt | date }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ article.content | slice: 0:200 }}...</p>
+        <p>{{ selectedArticle.content }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button [routerLink]="['/article', article._id]">Read More</button>
+        <button mat-icon-button>
+          <mat-icon>favorite</mat-icon>
+          <span>{{ selectedArticle.likes || 1  }}</span>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>comment</mat-icon>
+          <span>{{ selectedArticle.comments.length }}</span>
+        </button>
       </mat-card-actions>
+      <mat-card-content>
+        <div *ngFor="let comment of selectedArticle.comments">
+          <mat-card>
+            <mat-card-content>
+              <p>{{ comment.content }}</p>
+              <mat-card-subtitle>by {{ comment.author.username }}</mat-card-subtitle>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-card-content>
+      <mat-form-field>
+        <textarea matInput placeholder="Write comment ..." [(ngModel)]="newComment"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="addComment()">Comment</button>
     </mat-card>
   </div>
 </div>

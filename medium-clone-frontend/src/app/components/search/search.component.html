@@ -2,11 +2,4 @@
   <mat-form-field class="full-width">
     <input matInput placeholder="Search by title" [(ngModel)]="searchQuery" (input)="onSearch()">
   </mat-form-field>
-  <mat-form-field class="full-width">
-    <mat-chip-grid>
-      <mat-chip *ngFor="let tag of tags" (click)="onSearchByTag(tag)">
-        {{ tag }}
-      </mat-chip>
-    </mat-chip-grid>
-  </mat-form-field>
 </div>

@@ -1,33 +1,38 @@
-<mat-card>
-  <mat-card-title>{{ article.title }}</mat-card-title>
-  <mat-card-subtitle>by {{ article.author.username }}</mat-card-subtitle>
-  <mat-card-content>
-    <p>{{ article.content }}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-icon-button>
-      <mat-icon>thumb_up</mat-icon>
-      <span>{{ article.likes }}</span>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>thumb_down</mat-icon>
-      <span>{{ article.dislikes }}</span>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>comment</mat-icon>
-      <span>{{ article.comments.length }}</span>
-    </button>
-  </mat-card-actions>
-</mat-card>
-<div *ngFor="let comment of comments">
+<div *ngIf="article">
   <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ article.title }}</mat-card-title>
+      <mat-card-subtitle>by {{ article.author.username }} – Published at {{ article.createdAt | date }}</mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
-      <p>{{ comment.content }}</p>
-      <mat-card-subtitle>by {{ comment.author.username }}</mat-card-subtitle>
+      <p>{{ article.content }}</p>
     </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button>
+        <mat-icon>favorite</mat-icon>
+        <span>{{ article.likes || 0 }}</span>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>comment</mat-icon>
+        <span>{{ article.comments.length }}</span>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>bookmark</mat-icon>
+      </button>
+    </mat-card-actions>
+    <mat-card-content>
+      <div *ngFor="let comment of article.comments">
+        <mat-card>
+          <mat-card-content>
+            <p>{{ comment.content }}</p>
+            <mat-card-subtitle>by {{ comment.author.username }}</mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+    <mat-form-field>
+      <textarea matInput placeholder="Write comment ..." [(ngModel)]="newComment"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addComment()">Comment</button>
   </mat-card>
 </div>
-<mat-form-field>
-  <textarea matInput placeholder="Write comment ..." [(ngModel)]="newComment"></textarea>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="addComment()">Comment</button>

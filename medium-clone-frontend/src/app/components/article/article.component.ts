@@ -20,6 +20,8 @@ export class ArticleComponent implements OnInit {
   article: any;
   comments: any[] = [];
   newComment: string = '';
+  articles: any[] = [];
+  selectedArticle: any = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,11 +32,22 @@ export class ArticleComponent implements OnInit {
   ngOnInit(): void {
     const articleId = this.route.snapshot.paramMap.get('id');
     this.articleService.getArticleById(articleId!).subscribe((data) => {
-      this.article = data;
+
+     this.article = data;
+    });
+
+    this.articleService.getAllArticles().subscribe((data) => {
+      this.articles = data;
     });
 
     this.commentService.getCommentsForArticle(articleId!).subscribe((data) => {
       this.comments = data;
+    });
+  }
+
+  selectArticle(articleId: string): void {
+    this.articleService.getArticleById(articleId).subscribe((data) => {
+      this.selectedArticle = data;
     });
   }
 

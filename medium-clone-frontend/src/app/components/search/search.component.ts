@@ -14,15 +14,9 @@ import { CommonModule } from '@angular/common';
 })
 export class SearchComponent {
   @Output() search = new EventEmitter<string>();
-  @Output() searchByTag = new EventEmitter<string>();
   searchQuery: string = '';
-  tags: string[] = ['tag1', 'tag2', 'tag3'];
 
   onSearch(): void {
     this.search.emit(this.searchQuery);
-  }
-
-  onSearchByTag(tag: string): void {
-    this.searchByTag.emit(tag);
   }
 }
