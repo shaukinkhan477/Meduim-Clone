@@ -3,6 +3,20 @@
     <mat-card-header>
       <mat-card-title>{{ article.title }}</mat-card-title>
       <mat-card-subtitle>by {{ article.author.username }} – Published at {{ article.createdAt | date }}</mat-card-subtitle>
+      <div class="action-icons">
+        <button mat-icon-button (click)="createArticle()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="updateArticle()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteArticle()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="unpublishArticle()">
+          <mat-icon>visibility_off</mat-icon>
+        </button>
+      </div>
     </mat-card-header>
     <mat-card-content>
       <p>{{ article.content }}</p>

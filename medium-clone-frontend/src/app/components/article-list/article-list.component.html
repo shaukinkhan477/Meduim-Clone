@@ -3,8 +3,10 @@
      <app-search (search)="searchArticles($event)"></app-search>
     <div *ngFor="let article of articles" class="article-card">
       <mat-card>
-        <mat-card-title>{{ article.title }}</mat-card-title>
-        <mat-card-subtitle>by {{ article.author.username }} </mat-card-subtitle>
+        <mat-card-title>
+          {{ article.title }}
+        </mat-card-title>
+        <mat-card-subtitle>by {{ article.author.username }} - at {{ article.createdAt | date }} </mat-card-subtitle>
         <mat-card-content>
           <p>{{ article.content | slice: 0:100 }}...</p>
         </mat-card-content>
@@ -19,6 +21,20 @@
       <mat-card-header>
         <mat-card-title>{{ selectedArticle.title }}</mat-card-title>
         <mat-card-subtitle>by {{ selectedArticle.author.username }} – Published at {{ selectedArticle.createdAt | date }}</mat-card-subtitle>
+        <div class="action-icons">
+        <button mat-icon-button (click)="createArticle()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="updateArticle()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteArticle()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="unpublishArticle()">
+          <mat-icon>visibility_off</mat-icon>
+        </button>
+      </div>
       </mat-card-header>
       <mat-card-content>
         <p>{{ selectedArticle.content }}</p>
@@ -26,10 +42,10 @@
       <mat-card-actions>
         <button mat-icon-button>
           <mat-icon>favorite</mat-icon>
-          <span>{{ selectedArticle.likes || 1  }}</span>
+          <span (click)="countOnClick()">{{ selectedArticle.likes || count }}</span>
         </button>
         <button mat-icon-button>
-          <mat-icon>comment</mat-icon>
+          <mat-icon (click)="addComment()">comment</mat-icon>
           <span>{{ selectedArticle.comments.length }}</span>
         </button>
       </mat-card-actions>
@@ -38,11 +54,11 @@
           <mat-card>
             <mat-card-content>
               <p>{{ comment.content }}</p>
-              <mat-card-subtitle>by {{ comment.author.username }}</mat-card-subtitle>
+              <mat-card-subtitle>by {{  comment.author.username }} on {{date}} {{comment.author.createdAt}}</mat-card-subtitle>
             </mat-card-content>
           </mat-card>
         </div>
-      </mat-card-content>
+      </mat-card-content> 
       <mat-form-field>
         <textarea matInput placeholder="Write comment ..." [(ngModel)]="newComment"></textarea>
       </mat-form-field>

@@ -39,3 +39,9 @@ textarea.mat-input-element {
 button.mat-raised-button {
   margin-top: 10px;
 }
+
+.action-icons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}

@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/articles', pathMatch: 'full' },
   { path: 'articles', component: ArticleListComponent },
   { path: 'article/:id', component: ArticleComponent },
-  // { path: 'article', component: ArticleComponent },
+  { path: 'article', component: ArticleComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'search', component: SearchComponent },
