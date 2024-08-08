@@ -16,17 +16,23 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+  public get currentUserValue(): any {
+    return this.currentUserSubject.value;
   }
 
-  login(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, userData).pipe(
-      tap((response: any) => {
-        if (response.token) {
-          this.storeToken(response.token);
-          this.currentUserSubject.next(response.user);
-        }
+  public getToken(): string {
+    return this.currentUserValue?.token;
+  }
+
+ register(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, user);
+  }
+
+  login(credentials: { email: string, password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+      tap(user => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
       })
     );
   }
@@ -37,9 +43,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  getToken(): string {
-    return localStorage.getItem('token')!;
-  }
+
 
   storeToken(token: string): void {
     localStorage.setItem('token', token);
@@ -63,7 +67,4 @@ export class AuthService {
     return JSON.parse(atob(payload));
   }
 
-  public get currentUserValue(): any {
-    return this.currentUserSubject.value;
-  }
 }

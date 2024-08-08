@@ -22,7 +22,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './article-list.component.css'
 })
 export class ArticleListComponent implements OnInit {
-  article: any;
+  article: any = [];
   articles: any[] = [];
   selectedArticle: any = null;
   comments: any[] = [];
@@ -37,7 +37,7 @@ export class ArticleListComponent implements OnInit {
     private commentService: CommentService,
     private router: Router,
     public dialog: MatDialog,
-     private authService: AuthService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +51,9 @@ export class ArticleListComponent implements OnInit {
   selectArticle(articleId: string): void {
     this.articleService.getArticleById(articleId).subscribe((data) => {
       this.selectedArticle = data;
+      if (!this.selectedArticle.comments) {
+        this.selectedArticle.comments = []; // Initialize comments if undefined
+      }
     });
   }
 
@@ -71,7 +74,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   addComment(): void {
-    const comment = { content: this.newComment, author: { username: "current_user"} };
+    const comment = { content: this.newComment, author: { username: this.authService.currentUserValue.username} };
     if (!this.selectedArticle.comments) {
       this.selectedArticle.comments = [];
     }
@@ -83,10 +86,10 @@ export class ArticleListComponent implements OnInit {
   createArticle(): void {
     const dialogRef = this.dialog.open(CreateArticleDialogComponent, {
       width: '400px',
-      data: { author: this.authService.currentUserValue.username }
+      data: { author: { username: this.authService.currentUserValue.username } }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.articleService.createArticle(result).subscribe((data) => {
           console.log('Article created:', data);
@@ -96,29 +99,39 @@ export class ArticleListComponent implements OnInit {
     });
   }
 
+
   updateArticle(): void {
-    this.articleService.updateArticle(this.article._id, this.article).subscribe((data) => {
-      console.log('Article updated:', data);
-    });
+    if (this.selectedArticle && this.selectedArticle._id) {
+      this.articleService.updateArticle(this.selectedArticle._id, this.selectedArticle).subscribe((data) => {
+        console.log('Article updated:', data);
+        // this.router.navigate(['/articles']);
+      });
+    } else {
+      console.error('Article ID is not defined');
+    }
   }
 
   deleteArticle(): void {
-    this.articleService.deleteArticle(this.article._id).subscribe((data) => {
-      console.log('Article deleted:', data);
-      this.router.navigate(['/articles']);
-    });
+    if (this.selectedArticle && this.selectedArticle._id) {
+      this.articleService.deleteArticle(this.selectedArticle._id).subscribe((data) => {
+        console.log('Article deleted:', data);
+        this.selectedArticle = null;
+        this.getArticles();
+      });
+    } else {
+      console.error('Article ID is not defined');
+    }
   }
 
   unpublishArticle(): void {
-    this.articleService.unpublishArticle(this.article._id).subscribe((data) => {
-      console.log('Article unpublished:', data);
-      this.article.published = false;
-    });
+    if (this.selectedArticle && this.selectedArticle._id) {
+      this.articleService.unpublishArticle(this.selectedArticle._id).subscribe((data) => {
+        console.log('Article unpublished:', data);
+        this.selectedArticle.published = false;
+      });
+    } else {
+      console.error('Article ID is not defined');
+    }
   }
-
-  countOnClick(): void {
-    this.count++;
-  }
-
 
 }

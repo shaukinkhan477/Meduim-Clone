@@ -1,27 +1,137 @@
 # MediumCloneFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+This is the frontend part of the Medium Clone application built with Angular version 17.3.8.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js
+- Angular CLI
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone the repository:
 
-## Build
+    ```bash
+    git clone https://github.com/shaukinkhan477/Meduim-Clone.git
+    cd medium-clone/frontend
+    ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Install dependencies:
 
-## Running unit tests
+    ```bash
+    npm install
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. Start the development server:
 
-## Running end-to-end tests
+    ```bash
+    ng serve
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The frontend server will start on `http://localhost:4200`.
 
-## Further help
+## Features
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+User authentication (login, register)
+Create, read, update, delete (CRUD) articles
+Search articles by title or tag or keyword
+Comment on articles
+User profile management
+
+## Conception diagram
++---------------------+
+|  User Interface     |
+|  - Angular Components|
+|    - Navbar          |
+|    - Article List    |
+|    - Article Detail  |
+|    - Login           |
+|    - Register        |
+|    - Profile         |
+|    - Search          |
++---------+-----------+
+          |
+          v
++---------------------+
+|    Angular Services |
+|  - AuthService      |
+|  - ArticleService   |
+|  - CommentService   |
++---------+-----------+
+          |
+          v
++---------------------+
+|     Angular Guards  |
+|  - AuthGuard        |
++---------+-----------+
+          |
+          v
++---------------------+
+|    Backend API      |
+|  - /api/auth        |
+|  - /api/articles    |
++---------------------+
+
+
+## Project Structure
+
+```plaintext
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── article/
+│   │   │   │   ├── article.component.html
+│   │   │   │   ├── article.component.ts
+│   │   │   │   ├── article.component.css
+│   │   │   ├── article-list/
+│   │   │   │   ├── article-list.component.html
+│   │   │   │   ├── article-list.component.ts
+│   │   │   │   ├── article-list.component.css
+│   │   │   ├── create-article-dialog/
+│   │   │   │   ├── create-article-dialog.component.html
+│   │   │   │   ├── create-article-dialog.component.ts
+│   │   │   │   ├── create-article-dialog.component.css
+│   │   │   ├── navbar/
+│   │   │   │   ├── navbar.component.html
+│   │   │   │   ├── navbar.component.ts
+│   │   │   │   ├── navbar.component.css
+│   │   │   ├── login/
+│   │   │   │   ├── login.component.html
+│   │   │   │   ├── login.component.ts
+│   │   │   │   ├── login.component.css
+│   │   │   ├── register/
+│   │   │   │   ├── register.component.html
+│   │   │   │   ├── register.component.ts
+│   │   │   │   ├── register.component.css
+│   │   │   ├── profile/
+│   │   │   │   ├── profile.component.html
+│   │   │   │   ├── profile.component.ts
+│   │   │   │   ├── profile.component.css
+│   │   │   ├── search/
+│   │   │   │   ├── search.component.html
+│   │   │   │   ├── search.component.ts
+│   │   │   │   ├── search.component.css
+│   │   ├── services/
+│   │   │   ├── article.service.ts
+│   │   │   ├── auth.service.ts
+│   │   │   ├── comment.service.ts
+│   │   ├── guards/
+│   │   │   ├── auth.guard.ts
+│   │   ├── app.module.ts
+│   │   ├── app-routing.module.ts
+│   │   ├── app.component.html
+│   │   ├── app.component.ts
+│   │   ├── app.component.css
+│   ├── assets/
+│   ├── environments/
+│   │   ├── environment.ts
+│   │   ├── environment.prod.ts
+├── .angular.json
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.spec.json
+├── tslint.json
+├── README.md

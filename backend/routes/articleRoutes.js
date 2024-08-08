@@ -17,7 +17,5 @@ router.route('/').post(protect, createArticle).get(getAllArticles);
 router.route('/search').get(searchArticles);
 router.route('/:id').get(getArticleById).put(protect, updateArticle).delete(protect, deleteArticle);
 router.route('/:id/unpublish').put(protect, unpublishArticle);
-router.route('/search').get(searchArticles);
 
 module.exports = router;
- 

@@ -42,15 +42,15 @@
       <mat-card-actions>
         <button mat-icon-button>
           <mat-icon>favorite</mat-icon>
-          <span (click)="countOnClick()">{{ selectedArticle.likes || count }}</span>
+          <span>{{ selectedArticle.likes || 0 }}</span>
         </button>
         <button mat-icon-button>
           <mat-icon (click)="addComment()">comment</mat-icon>
-          <span>{{ selectedArticle.comments.length }}</span>
+          <span>{{ selectedArticle.comments?.length || 0 }}</span>
         </button>
       </mat-card-actions>
       <mat-card-content>
-        <div *ngFor="let comment of selectedArticle.comments">
+        <div *ngFor="let comment of selectedArticle.comments || []">
           <mat-card>
             <mat-card-content>
               <p>{{ comment.content }}</p>
@@ -58,7 +58,7 @@
             </mat-card-content>
           </mat-card>
         </div>
-      </mat-card-content> 
+      </mat-card-content>
       <mat-form-field>
         <textarea matInput placeholder="Write comment ..." [(ngModel)]="newComment"></textarea>
       </mat-form-field>

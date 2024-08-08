@@ -69,24 +69,40 @@ exports.updateArticle = async (req, res) => {
 };
 
 // Delete an article
+// exports.deleteArticle = async (req, res) => {
+//   try {
+//     const article = await Article.findById(req.params.id);
+//     if (!article) {
+//       return res.status(404).json({ message: 'Article not found' });
+//     }
+//     // Check if the user is the author of the article
+//     // if (article.author.toString() !== req.user._id.toString()) {
+//     //   return res.status(401).json({ error: 'User not authorized' });
+//     // }
+//     await article.remove(); // Change to article.remove() or use findByIdAndDelete
+//     res.status(200).json({ message: 'Article removed' });
+//   } catch (err) {
+//     res.status(400).json({ error: err.message });
+//   }
+// };
+
+// Delete an article
 exports.deleteArticle = async (req, res) => {
   try {
-    const article = await Article.findById(req.params.id);
+    const article = await Article.findByIdAndDelete(req.params.id);
     if (!article) {
-      return res.status(404).json({ error: 'Article not found' });
+      return res.status(404).json({ message: 'Article not found' });
     }
-
     // Check if the user is the author of the article
-    if (article.author.toString() !== req.user._id.toString()) {
-      return res.status(401).json({ error: 'User not authorized' });
-    }
-
-    await article.remove();
+   // if (article.author.toString() !== req.user._id.toString()) {
+   //   return res.status(401).json({ error: 'User not authorized' });
+  // }
     res.status(200).json({ message: 'Article removed' });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
+
 
 // Unpublish an article
 exports.unpublishArticle = async (req, res) => {

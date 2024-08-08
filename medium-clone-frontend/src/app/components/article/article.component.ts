@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import { CreateArticleDialogComponent } from '../navbarcreate-article-dialog/navbarcreate-article-dialog.component';
+import { AuthService } from '../../services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-article',
@@ -27,7 +30,9 @@ export class ArticleComponent implements OnInit {
     private route: ActivatedRoute,
     private articleService: ArticleService,
     private commentService: CommentService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +43,7 @@ export class ArticleComponent implements OnInit {
   }
 
   addComment(): void {
-    const comment = { content: this.newComment, author: { username: 'current_user' } };
+    const comment = { content: this.newComment, author: { username: this.authService.currentUserValue.username } };
     if (!this.article.comments) {
       this.article.comments = [];
     }
@@ -47,26 +52,50 @@ export class ArticleComponent implements OnInit {
   }
 
   createArticle(): void {
-    // Implement article creation logic
+    const dialogRef = this.dialog.open(CreateArticleDialogComponent, {
+      width: '400px',
+      data: { author: { username: this.authService.currentUserValue.username } }
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.articleService.createArticle(result).subscribe((data) => {
+          console.log('Article created:', data);
+          this.router.navigate(['/articles']);
+        });
+      }
+    });
   }
 
   updateArticle(): void {
-    this.articleService.updateArticle(this.article._id, this.article).subscribe((data) => {
-      console.log('Article updated:', data);
-    });
+    if (this.article && this.article._id) {
+      this.articleService.updateArticle(this.article._id, this.article).subscribe((data) => {
+        console.log('Article updated:', data);
+      });
+    } else {
+      console.error('Article ID is not defined');
+    }
   }
 
   deleteArticle(): void {
-    this.articleService.deleteArticle(this.article._id).subscribe((data) => {
-      console.log('Article deleted:', data);
-      this.router.navigate(['/articles']);
-    });
+    if (this.article && this.article._id) {
+      this.articleService.deleteArticle(this.article._id).subscribe((data) => {
+        console.log('Article deleted:', data);
+        this.router.navigate(['/articles']);
+      });
+    } else {
+      console.error('Article ID is not defined');
+    }
   }
 
-  unpublishArticle(): void {
-    this.articleService.unpublishArticle(this.article._id).subscribe((data) => {
-      console.log('Article unpublished:', data);
-      this.article.published = false;
-    });
+ unpublishArticle(): void {
+    if (this.article && this.article._id) {
+      this.articleService.unpublishArticle(this.article._id).subscribe((data) => {
+        console.log('Article unpublished:', data);
+        this.article.published = false;
+      });
+    } else {
+      console.error('Article ID is not defined');
+    }
   }
 }

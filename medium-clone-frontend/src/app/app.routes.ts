@@ -12,6 +12,7 @@ export const routes: Routes = [
   // { path: '', component: ArticleListComponent },
   { path: '', redirectTo: '/articles', pathMatch: 'full' },
   { path: 'articles', component: ArticleListComponent },
+  // { path: 'articles/:id', component: ArticleListComponent },
   { path: 'article/:id', component: ArticleComponent },
   { path: 'article', component: ArticleComponent },
   { path: 'login', component: LoginComponent },

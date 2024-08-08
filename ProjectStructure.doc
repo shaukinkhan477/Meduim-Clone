@@ -1,0 +1,82 @@
+project-root/
+├── backend/
+│   ├── controllers/
+│   │   ├── articleController.js
+│   │   ├── authController.js
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   ├── models/
+│   │   ├── Article.js
+│   │   ├── User.js
+│   ├── routes/
+│   │   ├── articleRoutes.js
+│   │   ├── authRoutes.js
+│   ├── config/
+│   │   ├── db.js
+│   ├── .env
+│   ├── server.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/
+│   │   │   │   ├── article/
+│   │   │   │   │   ├── article.component.html
+│   │   │   │   │   ├── article.component.ts
+│   │   │   │   │   ├── article.component.css
+│   │   │   │   ├── article-list/
+│   │   │   │   │   ├── article-list.component.html
+│   │   │   │   │   ├── article-list.component.ts
+│   │   │   │   │   ├── article-list.component.css
+│   │   │   │   ├── create-article-dialog/
+│   │   │   │   │   ├── create-article-dialog.component.html
+│   │   │   │   │   ├── create-article-dialog.component.ts
+│   │   │   │   │   ├── create-article-dialog.component.css
+│   │   │   │   ├── navbar/
+│   │   │   │   │   ├── navbar.component.html
+│   │   │   │   │   ├── navbar.component.ts
+│   │   │   │   │   ├── navbar.component.css
+│   │   │   │   ├── login/
+│   │   │   │   │   ├── login.component.html
+│   │   │   │   │   ├── login.component.ts
+│   │   │   │   │   ├── login.component.css
+│   │   │   │   ├── register/
+│   │   │   │   │   ├── register.component.html
+│   │   │   │   │   ├── register.component.ts
+│   │   │   │   │   ├── register.component.css
+│   │   │   │   ├── profile/
+│   │   │   │   │   ├── profile.component.html
+│   │   │   │   │   ├── profile.component.ts
+│   │   │   │   │   ├── profile.component.css
+│   │   │   │   ├── search/
+│   │   │   │   │   ├── search.component.html
+│   │   │   │   │   ├── search.component.ts
+│   │   │   │   │   ├── search.component.css
+│   │   │   ├── services/
+│   │   │   │   ├── article.service.ts
+│   │   │   │   ├── auth.service.ts
+│   │   │   │   ├── comment.service.ts
+│   │   │   ├── guards/
+│   │   │   │   ├── auth.guard.ts
+│   │   │   ├── app.module.ts
+│   │   │   ├── app-routing.module.ts
+│   │   │   ├── app.component.html
+│   │   │   ├── app.component.ts
+│   │   │   ├── app.component.css
+│   │   ├── assets/
+│   │   │   ├── images/
+│   │   │   ├── styles/
+│   │   │   ├── ...
+│   │   ├── environments/
+│   │   │   ├── environment.ts
+│   │   │   ├── environment.prod.ts
+│   ├── .angular.json
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── tsconfig.json
+│   ├── tsconfig.app.json
+│   ├── tsconfig.spec.json
+│   ├── tslint.json
+│   ├── README.md

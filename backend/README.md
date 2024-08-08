@@ -1,0 +1,121 @@
+# Backend for Medium Clone Application
+
+This is the backend part of the Medium Clone application built with Node.js, Express, and MongoDB.
+
+## Prerequisites
+
+- Node.js
+- MongoDB
+
+## Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/shaukinkhan477/Meduim-Clone.git
+    cd medium-clone/backend
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Create a `.env` file in the `backend` directory and add the following:
+
+    ```env
+    PORT=5000
+    MONGO_URI=your_mongodb_uri
+    JWT_SECRET= 'your_jwt_secret'
+    ```
+
+4. Start the server:
+
+    ```bash
+    npm start or node app.js
+    ```
+
+The backend server will start on `http://localhost:5000`.
+
+## Endpoints
+
+## Auth
+POST /api/auth/register: Register a new user
+POST /api/auth/login: Login a user
+## Articles
+GET /api/articles: Get all articles
+GET /api/articles/search: Search articles by title or keyword or tag
+GET /api/articles/:id: Get article by ID
+POST /api/articles: Create a new article (protected)
+PUT /api/articles/:id: Update an article by ID (protected)
+DELETE /api/articles/:id: Delete an article by ID (protected)
+PUT /api/articles/:id/unpublish: Unpublish an article by ID (protected)
+
+## Conception diagram
+
++---------------------+
+|  Client Requests    |
++---------+-----------+
+          |
+          v
++---------------------+
+|     Express.js      |
++---------+-----------+
+          |
+          v
++---------------------+
+|    Middleware       |
+|  - authMiddleware   |
++---------+-----------+
+          |
+          v
++---------------------+
+|     Controllers     |
+|  - authController   |
+|  - articleController|
++---------+-----------+
+          |
+          v
++---------+---------+
+|       Routes      |
+| - authRoutes      |
+| - articleRoutes   |
++---------+---------+
+          |
+          v
++---------------------+
+|    Mongoose Models  |
+|  - User             |
+|  - Article          |
++---------+-----------+
+          |
+          v
++---------------------+
+|      MongoDB        |
++---------------------+
+
+
+## Project Structure
+
+```plaintext
+backend/
+├── controllers/
+│   ├── articleController.js
+│   ├── authController.js
+├── middleware/
+│   ├── authMiddleware.js
+├── models/
+│   ├── Article.js
+│   ├── User.js
+├── routes/
+│   ├── articleRoutes.js
+│   ├── authRoutes.js
+├── config/
+│   ├── db.js
+├── .env
+├── app.js
+├── package.json
+├── package-lock.json
+├── README.md
+

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,15 @@ import { tap } from 'rxjs/operators';
 export class ArticleService {
   private apiUrl = 'http://localhost:5000/api/articles';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
   getAllArticles(): Observable<any> {
     return this.http.get(this.apiUrl).pipe(
@@ -22,25 +31,25 @@ export class ArticleService {
   }
 
   createArticle(articleData: any): Observable<any> {
-    return this.http.post(this.apiUrl, articleData).pipe(
+    return this.http.post(this.apiUrl, articleData, { headers: this.getAuthHeaders() }).pipe(
       tap((data) => console.log('Article created:', data))
     );
   }
 
   updateArticle(id: string, articleData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, articleData).pipe(
-      tap((data) => console.log('Article updated:', data))
-    );
-  }
+  return this.http.put(`${this.apiUrl}/${id}`, articleData, { headers: this.getAuthHeaders() }).pipe(
+    tap((data) => console.log('Article updated:', data))
+  );
+}
 
   deleteArticle(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`).pipe(
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() }).pipe(
       tap((data) => console.log('Article deleted:', data))
     );
   }
 
   unpublishArticle(id: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}/unpublish`, {}).pipe(
+    return this.http.put(`${this.apiUrl}/${id}/unpublish`, {}, { headers: this.getAuthHeaders() }).pipe(
       tap((data) => console.log('Article unpublished:', data))
     );
   }
