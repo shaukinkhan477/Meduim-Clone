@@ -1,9 +1,27 @@
 <mat-toolbar color="primary">
-  <span class="logo">Medium</span>
+  <span class="logo">
+
+    Medium
+  </span>
   <span class="spacer"></span>
-  <button mat-button routerLink="/" (click)="home()">Home</button>
-  <button mat-button routerLink="/login" (click)="login()">Login</button>
-  <button mat-button routerLink="/register" (click)="register()">Register</button>
-  <button mat-button *ngIf="authService.isAuthenticated()" (click)="profile()">Profile</button>
-  <button mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">Logout</button>
+  <button mat-button routerLink="/" (click)="home()">
+    <mat-icon>home</mat-icon>
+    Home
+  </button>
+  <button mat-button routerLink="/login" (click)="login()">
+    <mat-icon>login</mat-icon>
+    Login
+  </button>
+  <button mat-button routerLink="/register" (click)="register()">
+    <mat-icon>person_add</mat-icon>
+    Register
+  </button>
+  <button mat-button *ngIf="authService.isAuthenticated()" (click)="profile()">
+    <mat-icon>person</mat-icon>
+    Profile
+  </button>
+  <button mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
 </mat-toolbar>

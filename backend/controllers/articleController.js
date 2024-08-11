@@ -31,7 +31,7 @@ exports.getAllArticles = async (req, res) => {
 // Get a single article by ID
 exports.getArticleById = async (req, res) => {
   try {
-    const article = await Article.findById(req.params.id).populate('author', 'username email');
+    const article = await Article.findById(req.params.id).populate('author', 'username email').populate('comments.author', 'username'); // Populate the author of the comments;
     if (!article) {
       return res.status(404).json({ error: 'Article not found' });
     }
@@ -133,6 +133,54 @@ exports.searchArticles = async (req, res) => {
       published: true
     }).populate('author', 'username email');
     res.status(200).json(articles);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+
+exports.addComment = async (req, res) => {
+  try {
+    const article = await Article.findById(req.params.id);
+    // .populate('author', 'username') // Populate author of the article
+    // .populate('comments.author', 'username'); // Populate author of the comments
+    if (!article) {
+      return res.status(404).json({ message: 'Article not found' });
+    }
+
+    const comment = {
+      content: req.body.content,
+      author: req.user._id,
+    };
+
+    article.comments.push(comment);
+    await article.save();
+
+   // Populate the author field for the comments
+    const updatedArticle = await Article.findById(req.params.id)
+      .populate('comments.author', 'username');
+
+    res.status(200).json(article);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+exports.addReaction = async (req, res) => {
+  try {
+    const article = await Article.findById(req.params.id);
+    if (!article) {
+      return res.status(404).json({ message: 'Article not found' });
+    }
+
+    const reaction = {
+      type: req.body.type,
+      author: req.user._id,
+    };
+
+    article.reactions.push(reaction);
+    await article.save();
+    res.status(200).json(article);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

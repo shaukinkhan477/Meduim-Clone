@@ -28,7 +28,7 @@ export class ArticleListComponent implements OnInit {
   comments: any[] = [];
   newComment: string = '';
   count: number = 0;
-  date: Date= new Date;
+  // date: Date= new Date;
 
 
 
@@ -74,13 +74,19 @@ export class ArticleListComponent implements OnInit {
   }
 
   addComment(): void {
-    const comment = { content: this.newComment, author: { username: this.authService.currentUserValue.username} };
-    if (!this.selectedArticle.comments) {
-      this.selectedArticle.comments = [];
-    }
-    this.selectedArticle.comments.push(comment);
-    this.newComment = '';
+  if (this.newComment.trim()) {
+    this.articleService.addComment(this.selectedArticle._id, this.newComment).subscribe((data) => {
+      this.selectedArticle = data;
+      this.newComment = '';
+    });
   }
+}
+
+  addReaction(type: string): void {
+  this.articleService.addReaction(this.selectedArticle._id, type).subscribe((data) => {
+    this.selectedArticle = data;
+  });
+}
 
 
   createArticle(): void {

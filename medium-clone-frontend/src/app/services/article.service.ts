@@ -59,4 +59,19 @@ export class ArticleService {
       tap((data) => console.log('Search results:', data))
     );
   }
+
+ addComment(articleId: string, content: string): Observable<any> {
+  const body = { content };
+  return this.http.post(`${this.apiUrl}/${articleId}/comments`, body, { headers: this.getAuthHeaders() }).pipe(
+    tap((data) => console.log('Comment added:', data))
+  );
+}
+
+addReaction(articleId: string, type: string): Observable<any> {
+  const body = { type };
+  return this.http.post(`${this.apiUrl}/${articleId}/reactions`, body, { headers: this.getAuthHeaders() }).pipe(
+    tap((data) => console.log('Reaction added:', data))
+  );
+}
+
 }

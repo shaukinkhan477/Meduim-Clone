@@ -1,11 +1,11 @@
 # Backend for Medium Clone Application
 
-This is the backend part of the Medium Clone application built with Node.js, Express, and MongoDB.
+This is the backend part of the Medium Clone application built with Node.js v20.11.0, Express, and MongoDB v6.0.4.
 
 ## Prerequisites
 
-- Node.js
-- MongoDB
+- Node.js v20.11.0
+- MongoDB v6.0.4
 
 ## Installation
 
@@ -22,18 +22,10 @@ This is the backend part of the Medium Clone application built with Node.js, Exp
     npm install
     ```
 
-3. Create a `.env` file in the `backend` directory and add the following:
-
-    ```env
-    PORT=5000
-    MONGO_URI=your_mongodb_uri
-    JWT_SECRET= 'your_jwt_secret'
-    ```
-
-4. Start the server:
+3. Start the server:
 
     ```bash
-    npm start or node app.js
+     node app.js
     ```
 
 The backend server will start on `http://localhost:5000`.
@@ -113,7 +105,6 @@ backend/
 │   ├── authRoutes.js
 ├── config/
 │   ├── db.js
-├── .env
 ├── app.js
 ├── package.json
 ├── package-lock.json

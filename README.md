@@ -1,4 +1,18 @@
+![login page](<screenshots/Screenshot 2024-08-11 173932.png>)
 
+![register user page](<screenshots/Screenshot 2024-08-11 174032.png>)
+
+![home page](<screenshots/Screenshot 2024-08-11 180600.png>)
+
+![home page](<screenshots/Screenshot 2024-08-11 174208.png>)
+
+![creat article popup](<screenshots/Screenshot 2024-08-11 174347.png>)
+
+![current user profile page](<screenshots/Screenshot 2024-08-11 174419.png>)
+
+![search article](<screenshots/Screenshot 2024-08-11 174606.png>)
+
+![search article result](<screenshots/Screenshot 2024-08-11 174636.png>)
 ### README for the Whole Project
 
 #### `README.md`
@@ -6,13 +20,13 @@
 ```markdown
 # Medium Clone Application
 
-This is a full-stack clone of the Medium platform built using the MEAN stack (MongoDB, Express.js, Angular V17.3.8, Node.js).
+This is a full-stack clone of the Medium platform built using the MEAN stack (MongoDB v6.0.4, Express.js, Angular V17.3.8, Node.js v20.11.0).
 
 ## Prerequisites
 
-- Node.js
-- MongoDB
-- Angular CLI
+- Node.js v20.11.0
+- MongoDB v6.0.4
+- Angular CLI V17.3.8
 
 ## Installation
 
@@ -29,18 +43,10 @@ This is a full-stack clone of the Medium platform built using the MEAN stack (Mo
     npm install
     ```
 
-3. Create a `.env` file in the `backend` directory and add the following:
-
-    ```env
-    PORT=5000
-    MONGO_URI=your_mongodb_uri
-    JWT_SECRET= 'your_jwt_secret'
-    ```
-
-4. Start the backend server:
+3. Start the backend server:
 
     ```bash
-    npm start or node app.js
+    node app.js
     ```
 
 ## Endpoints
@@ -157,7 +163,9 @@ User profile management
 |  +---------------------+  |
 |  | Mongoose Models     |  |
 |  |  - User             |  |
-|  |  - Article          |  |
+|  |  - Article          |
+|  |  - Comment             |  |
+|  |  - Reaction         |  |
 |  +---------+-----------+  |
 |            |              |
 |            v              |
@@ -185,7 +193,6 @@ project-root/
 │   │   ├── authRoutes.js
 │   ├── config/
 │   │   ├── db.js
-│   ├── .env
 │   ├── app.js
 │   ├── package.json
 │   ├── package-lock.json

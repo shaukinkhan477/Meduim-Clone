@@ -1,9 +1,11 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="currentUser">
   <mat-card>
-    <mat-card-title>Profile</mat-card-title>
+    <mat-card-header>
+      <mat-card-title>Profile</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
-      <p><strong>Username:</strong> {{ authService.currentUserValue.username }}</p>
-      <p><strong>Email:</strong> {{ authService.currentUserValue.email }}</p>
+      <p><strong>Username:</strong> {{ currentUser.user.username }}</p>
+      <p><strong>Email:</strong> {{ currentUser.user.email }}</p>
     </mat-card-content>
   </mat-card>
 </div>

@@ -1,7 +1,21 @@
 .search-container {
   margin-top: 20px;
+  border-radius: 100px;
 }
 
 .full-width {
   width: 100%;
+}
+.search-input {
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 80px; /* Matches the container's border radius */
+  outline: none;
+  background-color: transparent; /* Removes default background */
+  font-size: 16px;
+  color: #333;
+}
+.search-input::placeholder {
+  color: #888;
 }
